@@ -888,3 +888,55 @@ if (document.readyState === 'loading') {
 } else {
     initSlider();
 }
+
+// ========== SEO FUNCTIONS ==========
+function initSEO() {
+    // Update tahun dinamis di footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Tambahkan meta description dinamis jika diperlukan
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+        metaDescription.content = "Adlan - Sales Resmi Toyota Veteran Bintaro Jakarta Selatan. Promo mobil Toyota Fortuner, Avanza, Veloz, Innova. Hubungi +62 815-7590-4637";
+    }
+    
+    // Update page title dengan nama model jika di modal detail
+    const modalObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList') {
+                const modalTitle = document.querySelector('.car-detail-content h2');
+                if (modalTitle) {
+                    document.title = modalTitle.textContent + " - Toyota Veteran Bintaro";
+                }
+            }
+        });
+    });
+    
+    if (document.getElementById('car-modal')) {
+        modalObserver.observe(document.getElementById('car-modal'), {
+            childList: true,
+            subtree: true
+        });
+    }
+}
+
+// Panggil fungsi SEO saat halaman load
+document.addEventListener('DOMContentLoaded', initSEO);
+
+// Log untuk Google Analytics (jika ada)
+function logPageView(pageName) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'page_view', {
+            page_title: pageName,
+            page_location: window.location.href,
+            page_path: window.location.pathname
+        });
+    }
+}
+
+// Track button clicks untuk analytics
+document.querySelectorAll('.btn-whatsapp, .car-btn-chat, .nav-whatsapp-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        logPageView('WhatsApp Click - ' + this.textContent.trim());
+    });
+});
