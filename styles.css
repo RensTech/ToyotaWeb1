@@ -72,31 +72,31 @@ img {
 }
 
 .btn-catalog {
-    background-color: #1a6b3c;
+    background-color: #003366; /* Biru tua mengganti hijau */
     color: white;
 }
 
 .btn-catalog:hover {
-    background-color: #14542e;
+    background-color: #002244; /* Biru tua lebih gelap */
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(26, 107, 60, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2);
 }
 
 .btn-map {
     background-color: #f8f9fa;
-    color: #1a6b3c;
-    border: 2px solid #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
+    border: 2px solid #003366; /* Biru tua mengganti hijau */
 }
 
 .btn-map:hover {
-    background-color: #1a6b3c;
+    background-color: #003366; /* Biru tua mengganti hijau */
     color: white;
     transform: translateY(-3px);
 }
 
 .section-title {
     font-size: 36px;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     text-align: center;
     margin-bottom: 20px;
     position: relative;
@@ -110,7 +110,7 @@ img {
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background-color: #25D366;
+    background-color: #0040ff;
     border-radius: 2px;
 }
 
@@ -147,20 +147,29 @@ img {
 }
 
 .toyota-logo {
-    height: 50px;
+    height: 30px;
     width: auto;
 }
 
 .logo-text h1 {
-    font-size: 24px;
-    color: #1a6b3c;
+    font-size: 28px;
     margin-bottom: 0;
+    font-weight: 700;
+}
+
+.logo-text h1 .tunas {
+    color: #003366; /* Biru tua untuk "tunas" */
+}
+
+.logo-text h1 .toyota {
+    color: #FF0000; /* Merah untuk "toyota" */
 }
 
 .logo-text p {
     font-size: 14px;
     color: #666;
     margin-bottom: 0;
+    font-weight: 500;
 }
 
 .nav-menu {
@@ -178,7 +187,7 @@ img {
 }
 
 .nav-menu a:hover, .nav-menu a.active {
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
 }
 
 .nav-menu a.active::after {
@@ -188,7 +197,7 @@ img {
     left: 0;
     width: 100%;
     height: 3px;
-    background-color: #25D366;
+    background-color: #FF0000; /* Merah untuk underline aktif */
     border-radius: 1.5px;
 }
 
@@ -209,7 +218,7 @@ img {
 .menu-toggle {
     display: none;
     font-size: 24px;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     cursor: pointer;
 }
 
@@ -239,7 +248,7 @@ img {
 
 .hero h1 {
     font-size: 42px;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     margin-bottom: 20px;
 }
 
@@ -277,7 +286,7 @@ img {
 /* Promo Slider */
 .promo-slider {
     padding: 80px 0;
-    background-color: #f0f7f2;
+    background-color: #f0f2f7; /* Warna biru muda */
 }
 
 .slider-container {
@@ -297,7 +306,7 @@ img {
 .slide {
     min-width: 100%;
     padding: 60px 40px;
-    background: linear-gradient(135deg, #1a6b3c 0%, #25D366 100%);
+    background: linear-gradient(135deg, #003366 0%, #004488 100%); /* Gradient biru */
     color: white;
 }
 
@@ -365,7 +374,7 @@ img {
 }
 
 .dot.active {
-    background-color: #1a6b3c;
+    background-color: #003366; /* Biru tua mengganti hijau */
     transform: scale(1.2);
 }
 
@@ -394,32 +403,32 @@ img {
 .benefit-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-    border-color: #25D366;
+    border-color: #003366; /* Biru tua mengganti hijau */
 }
 
 .benefit-icon {
     width: 70px;
     height: 70px;
-    background-color: #e8f5e9;
+    background-color: #e8ebf5; /* Biru muda */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 20px;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     font-size: 28px;
     transition: all 0.3s ease;
 }
 
 .benefit-card:hover .benefit-icon {
-    background-color: #25D366;
+    background-color: #003366; /* Biru tua mengganti hijau */
     color: white;
     transform: scale(1.1);
 }
 
 .benefit-card h3 {
     font-size: 22px;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     margin-bottom: 15px;
 }
 
@@ -431,7 +440,7 @@ img {
 /* Catalog Section */
 .catalog {
     padding: 80px 0;
-    background-color: #f0f7f2;
+    background-color: #f0f2f7; /* Warna biru muda */
 }
 
 .filter-container {
@@ -461,9 +470,9 @@ img {
 }
 
 .filter-btn.active, .filter-btn:hover {
-    background-color: #1a6b3c;
+    background-color: #003366; /* Biru tua mengganti hijau */
     color: white;
-    border-color: #1a6b3c;
+    border-color: #003366; /* Biru tua mengganti hijau */
 }
 
 .search-box {
@@ -481,7 +490,7 @@ img {
 }
 
 .search-box input:focus {
-    border-color: #1a6b3c;
+    border-color: #003366; /* Biru tua mengganti hijau */
     outline: none;
 }
 
@@ -534,8 +543,8 @@ img {
 
 .car-category {
     display: inline-block;
-    background-color: #e8f5e9;
-    color: #1a6b3c;
+    background-color: #e8ebf5; /* Biru muda */
+    color: #003366; /* Biru tua mengganti hijau */
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 14px;
@@ -545,7 +554,7 @@ img {
 
 .car-title {
     font-size: 22px;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     margin-bottom: 10px;
     height: 60px;
 }
@@ -560,7 +569,7 @@ img {
 .car-price {
     font-size: 24px;
     font-weight: 700;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     margin-bottom: 20px;
 }
 
@@ -580,17 +589,17 @@ img {
 
 .car-btn-detail {
     background-color: #f8f9fa;
-    color: #1a6b3c;
-    border: 2px solid #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
+    border: 2px solid #003366; /* Biru tua mengganti hijau */
 }
 
 .car-btn-detail:hover {
-    background-color: #1a6b3c;
+    background-color: #003366; /* Biru tua mengganti hijau */
     color: white;
 }
 
 .car-btn-chat {
-    background-color: #25D366;
+    background-color: #0040ff;
     color: white;
 }
 
@@ -638,7 +647,7 @@ img {
 }
 
 .close-modal:hover {
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
 }
 
 .modal-body {
@@ -653,7 +662,7 @@ img {
 
 .car-detail-header h2 {
     font-size: 32px;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     margin-bottom: 10px;
 }
 
@@ -665,8 +674,8 @@ img {
 .car-detail-price {
     font-size: 28px;
     font-weight: 700;
-    color: #1a6b3c;
-    background-color: #f0f7f2;
+    color: #003366; /* Biru tua mengganti hijau */
+    background-color: #f0f2f7; /* Warna biru muda */
     padding: 20px;
     border-radius: 8px;
     text-align: center;
@@ -674,10 +683,10 @@ img {
 
 .car-detail-features h3 {
     font-size: 24px;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #e8f5e9;
+    border-bottom: 2px solid #e8ebf5; /* Biru muda */
 }
 
 .features-list {
@@ -695,15 +704,15 @@ img {
 }
 
 .features-list i {
-    color: #25D366;
+    color: #003366; /* Biru tua mengganti hijau */
 }
 
 .contact-form h3 {
     font-size: 24px;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #e8f5e9;
+    border-bottom: 2px solid #e8ebf5; /* Biru muda */
 }
 
 .form-group {
@@ -728,7 +737,7 @@ img {
 }
 
 .form-control:focus {
-    border-color: #1a6b3c;
+    border-color: #003366; /* Biru tua mengganti hijau */
     outline: none;
 }
 
@@ -755,7 +764,7 @@ img {
 .form-submit {
     width: 100%;
     padding: 16px;
-    background-color: #25D366;
+    background-color: #0040ff;
     color: white;
     border: none;
     border-radius: 6px;
@@ -816,14 +825,14 @@ img {
 
 .article-date {
     font-size: 14px;
-    color: #25D366;
+    color: #003366; /* Biru tua mengganti hijau */
     font-weight: 500;
     margin-bottom: 10px;
 }
 
 .article-card h3 {
     font-size: 22px;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     margin-bottom: 15px;
     height: 70px;
 }
@@ -836,7 +845,7 @@ img {
 }
 
 .article-link {
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -851,7 +860,7 @@ img {
 /* Gallery Section */
 .gallery {
     padding: 80px 0;
-    background-color: #f0f7f2;
+    background-color: #f0f2f7; /* Warna biru muda */
 }
 
 .gallery-grid {
@@ -896,7 +905,7 @@ img {
 
 .gallery-info h4 {
     font-size: 20px;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     margin-bottom: 5px;
 }
 
@@ -908,7 +917,7 @@ img {
 
 .car-model {
     font-weight: 600;
-    color: #25D366;
+    color: #FF0000; /* Merah untuk model mobil */
 }
 
 /* Contact Section */
@@ -950,19 +959,19 @@ img {
 .contact-icon {
     width: 60px;
     height: 60px;
-    background-color: #e8f5e9;
+    background-color: #e8ebf5; /* Biru muda */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     font-size: 24px;
     flex-shrink: 0;
 }
 
 .contact-details h3 {
     font-size: 22px;
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     margin-bottom: 10px;
 }
 
@@ -972,12 +981,12 @@ img {
 }
 
 .contact-details a {
-    color: #1a6b3c;
+    color: #003366; /* Biru tua mengganti hijau */
     font-weight: 600;
 }
 
 .contact-details a:hover {
-    color: #25D366;
+    color: #FF0000; /* Merah untuk hover */
 }
 
 .contact-buttons {
@@ -996,7 +1005,7 @@ img {
 
 /* Footer */
 .footer {
-    background-color: #1a6b3c;
+    background-color: #003366; /* Biru tua mengganti hijau */
     color: white;
     padding: 50px 0 30px;
 }
@@ -1025,6 +1034,14 @@ img {
     font-size: 24px;
     color: white;
     margin-bottom: 5px;
+}
+
+.footer-text h3 .tunas {
+    color: #ffffff;
+}
+
+.footer-text h3 .toyota {
+    color: #FF6B6B; /* Merah lebih terang untuk footer */
 }
 
 .footer-text p {
@@ -1256,8 +1273,9 @@ img {
         height: 60px;
         justify-content: center;
     }
+}
 
-    /* ========== TAMBAHAN UNTUK CAROUSEL DRAG ========== */
+/* ========== TAMBAHAN UNTUK CAROUSEL DRAG ========== */
 .slider {
     display: flex;
     transition: transform 0.5s ease;
@@ -1274,8 +1292,8 @@ img {
 .nav-whatsapp-btn {
     background-color: #25D366;
     color: white;
-    padding: 12px 28px !important; /* Diperpanjang lagi */
-    border-radius: 8px; /* Border radius sedikit lebih besar */
+    padding: 12px 28px !important;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1302,4 +1320,89 @@ img {
         display: flex;
     }
 }
+
+/* Hero Section */
+.hero {
+    padding: 150px 0 80px;
+    /* GANTI background-color dengan background-image */
+    background-image: url('Foto-adlan.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Tambahkan overlay untuk meningkatkan keterbacaan teks */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.65); /* Overlay putih semi-transparan */
+    z-index: 1;
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    position: relative;
+    z-index: 2; /* Pastikan konten di atas overlay */
+}
+
+/* Tambahan untuk teks agar lebih terbaca */
+.hero h2 {
+    font-size: 28px;
+    color: #003366; /* Biru tua */
+    margin-bottom: 10px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    color: #003366; /* Biru tua */
+    margin-bottom: 20px;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 30px;
+    max-width: 600px;
+}
+
+/* Optimasi untuk responsive */
+@media (max-width: 768px) {
+    .hero {
+        padding: 120px 0 60px;
+    }
+    
+    .hero h1 {
+        font-size: 32px;
+    }
+    
+    .hero h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 100px 0 40px;
+    }
+    
+    .hero h1 {
+        font-size: 28px;
+    }
+    
+    .hero h2 {
+        font-size: 20px;
+    }
+    
+    .hero-subtitle {
+        font-size: 18px;
+    }
 }
