@@ -48,32 +48,88 @@
 </head>
 <body>
     <!-- Header & Navigation -->
-    <header class="header">
-        <div class="container">
-            <nav class="navbar">
+    <!-- Header & Navigation -->
+<header class="header">
+    <div class="container">
+        <nav class="navbar">
+            <!-- Bagian kiri: Logo TunasToyota + Foto Profil -->
+            <div class="nav-left">
+                <!-- Logo TunasToyota -->
                 <div class="logo">
                     <img src="Tunas.png" alt="Toyota Logo" class="toyota-logo">
-                    <div class="logo-text">
-                        <!-- <h1>TOYOTA</h1> -->
-                        <p>Adlan Bintaro - Jakarta Selatan</p>
+                </div>
+                
+                <!-- Profile Photo/Logo -->
+                <div class="profile-container">
+                    <div class="profile-photo" id="profile-photo">
+                        <img src="Profile.png" alt="Adlan Mohazeb Sir" id="profile-img">
                     </div>
                 </div>
-                <div class="menu-toggle" id="menu-toggle">
-                    <i class="fas fa-bars"></i>
+            </div>
+            
+            <!-- Dropdown Profile -->
+            <div class="profile-dropdown" id="profile-dropdown">
+                <div class="profile-dropdown-content">
+                    <div class="profile-header">
+                        <div class="profile-large-photo">
+                            <img src="Profile.png" alt="Adlan Mohazeb Sir">
+                        </div>
+                        <h3>Adlan Mohazeb Sir</h3>
+                        <p class="profile-title">Sales Executive</p>
+                    </div>
+                    
+                    <div class="profile-info">
+                        <p class="profile-description">
+                            Adlan akan selalu siap membantu untuk menemukan pilihan kendaraan 
+                            Mobil Toyota yang tepat sesuai budget dan kebutuhan anda.
+                        </p>
+                        
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <div class="contact-details">
+                                    <p class="contact-label">Phone</p>
+                                    <p class="contact-value">+62 815-7590-4637</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fab fa-whatsapp"></i>
+                                <div class="contact-details">
+                                    <p class="contact-label">WhatsApp</p>
+                                    <p class="contact-value">+62 815-7590-4637</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- <a href="mailto:steven@toyotaveteran.my.id" class="email-btn">
+                            <i class="fas fa-envelope"></i> SEND EMAIL
+                        </a> -->
+                    </div>
                 </div>
-                <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#home" class="active">Beranda</a></li>
-                    <li><a href="#catalog">Katalog Mobil</a></li>
-                    <li><a href="#why-us">Kenapa Adlan?</a></li>
-                    <li><a href="#promotions">Promo</a></li>
-                    <li><a href="#gallery">Galeri</a></li>
-                    <li><a href="#contact">Kontak</a></li>
-                    <li><a href="https://wa.me/6281575904637" class="nav-whatsapp-btn"><i class="fab fa-whatsapp"></i> Hubungi</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+            </div>
+            
+            <!-- Overlay for closing dropdown -->
+            <div class="profile-dropdown-overlay" id="dropdown-overlay"></div>
+            
+            <!-- Menu Toggle (Hamburger) di pojok kanan -->
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="active">Beranda</a></li>
+                <li><a href="#catalog">Katalog Mobil</a></li>
+                <li><a href="#why-us">Kenapa Adlan?</a></li>
+                <li><a href="#promotions">Promo</a></li>
+                <li><a href="#gallery">Galeri</a></li>
+                <li><a href="#contact">Kontak</a></li>
+                <li><a href="https://wa.me/6285155055799" class="nav-whatsapp-btn"><i class="fab fa-whatsapp"></i> Hubungi</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
@@ -122,7 +178,7 @@
                     </div>
                     <div class="slide">
                         <div class="slide-content">
-                            <h3>Dan banyak benefit lainnya</h3>
+                            <h3>Dan banyak benefit lainnya</h3>
                             <p></p>
                         </div>
                     </div>
@@ -302,59 +358,92 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <!-- <section class="gallery" id="gallery">
+        <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
         <div class="container">
             <h2 class="section-title">Galeri Serah Terima</h2>
             <p class="section-subtitle">Momen kebahagiaan pelanggan kami saat serah terima mobil Toyota baru.</p>
             
-            <div class="gallery-grid">
-                <div class="gallery-item fade-in">
-                    <div class="gallery-image">
-                        <img src="https://images.unsplash.com/photo-1601042879364-f3947d1f9fc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Pelanggan Toyota">
+            <!-- Gallery Carousel Container -->
+            <div class="gallery-carousel-container">
+                <div class="gallery-carousel">
+                    <!-- Slide 1 -->
+                    <div class="gallery-slide active">
+                        <div class="gallery-slide-content">
+                            <div class="gallery-slide-image">
+                                <img src="galeri1.jpg" alt="Pelanggan Toyota">
+                            </div>
+                            <div class="gallery-slide-info">
+                                <h4>Nama Customer</h4>
+                                <p>lokasi nya dimana ini?</p>
+                                <p class="car-model">ketutupan itu mobilnnya mas saya gatau</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="gallery-info">
-                        <h4>Bapak Rudi & Keluarga</h4>
-                        <p>Jakarta Selatan</p>
-                        <p class="car-model">Toyota Avanza 1.5 G CVT</p>
+                    
+                    <!-- Slide 2 -->
+                    <div class="gallery-slide">
+                        <div class="gallery-slide-content">
+                            <div class="gallery-slide-image">
+                                <img src="galeri2.jpg" alt="Pelanggan Toyota">
+                            </div>
+                            <div class="gallery-slide-info">
+                                <h4>Nama Customer</h4>
+                                <p>lokasi nya dimana ini?</p>
+                                <p class="car-model">ketutupan itu mobilnnya mas saya gatau</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3 -->
+                    <div class="gallery-slide">
+                        <div class="gallery-slide-content">
+                            <div class="gallery-slide-image">
+                                <img src="galeri3.jpg" alt="Pelanggan Toyota">
+                            </div>
+                            <div class="gallery-slide-info">
+                                <h4>Nama Customer</h4>
+                                <p>lokasi nya dimana ini?</p>
+                                <p class="car-model">ketutupan itu mobilnnya mas saya gatau</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 4 -->
+                    <div class="gallery-slide">
+                        <div class="gallery-slide-content">
+                            <div class="gallery-slide-image">
+                                <img src="galeri4.jpg" alt="Pelanggan Toyota">
+                            </div>
+                            <div class="gallery-slide-info">
+                                <h4>Nama Customer</h4>
+                                <p>lokasi nya dimana ini?</p>
+                                <p class="car-model">ketutupan itu mobilnnya mas saya gatau</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="gallery-item fade-in">
-                    <div class="gallery-image">
-                        <img src="https://images.unsplash.com/photo-1554412931-7d5fd5c909c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Pelanggan Toyota">
-                    </div>
-                    <div class="gallery-info">
-                        <h4>Ibu Sari & Anak</h4>
-                        <p>Tangerang Selatan</p>
-                        <p class="car-model">Toyota Raize 1.0T G CVT</p>
-                    </div>
+                <!-- Carousel Controls -->
+                <div class="gallery-controls">
+                    <button class="gallery-btn prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="gallery-btn next">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
                 
-                <div class="gallery-item fade-in">
-                    <div class="gallery-image">
-                        <img src="https://images.unsplash.com/photo-1601834254945-8985c0d4b6e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Pelanggan Toyota">
-                    </div>
-                    <div class="gallery-info">
-                        <h4>Bapak Hadi</h4>
-                        <p>Bintaro, Jakarta Selatan</p>
-                        <p class="car-model">Toyota Fortuner 2.8 VRZ GR-S</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item fade-in">
-                    <div class="gallery-image">
-                        <img src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Pelanggan Toyota">
-                    </div>
-                    <div class="gallery-info">
-                        <h4>Keluarga Wijaya</h4>
-                        <p>Pesanggrahan, Jakarta</p>
-                        <p class="car-model">Toyota Innova Zenix 2.0 V HV</p>
-                    </div>
+                <!-- Carousel Dots -->
+                <div class="gallery-dots">
+                    <span class="gallery-dot active"></span>
+                    <span class="gallery-dot"></span>
+                    <span class="gallery-dot"></span>
+                    <span class="gallery-dot"></span>
                 </div>
             </div>
         </div>
-    </section> -->
+    </section>
 
     <!-- Contact & Location Section -->
     <section class="contact" id="contact">

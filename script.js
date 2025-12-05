@@ -104,7 +104,7 @@ const carData = {
         },
         {
             model: "NEW KIJANG INNOVA",
-            image: "Inova.png",
+            image: "Inova.jpg",
             description: "Legenda MPV Indonesia",
             variants: [
                 { variant: "2.0 G M/T BSN", price: "IDR 389.100.000" },
@@ -118,7 +118,7 @@ const carData = {
     suv: [
         {
             model: "ALL NEW LAND CRUISER",
-            image: "LC.png",
+            image: "LC.jpg",
             description: "SUV legendaris dengan kemampuan off-road terbaik",
             variants: [
                 { variant: "VX-R 4X4 A/T", price: "IDR 2.626.700.000" },
@@ -940,3 +940,605 @@ document.querySelectorAll('.btn-whatsapp, .car-btn-chat, .nav-whatsapp-btn').for
         logPageView('WhatsApp Click - ' + this.textContent.trim());
     });
 });
+
+// ========== GALLERY CAROUSEL (FIXED VERSION) ==========
+const galleryCarousel = document.querySelector('.gallery-carousel');
+const gallerySlides = document.querySelectorAll('.gallery-slide');
+const galleryDots = document.querySelectorAll('.gallery-dot');
+const galleryPrevBtn = document.querySelector('.gallery-controls .prev');
+const galleryNextBtn = document.querySelector('.gallery-controls .next');
+
+let currentGallerySlide = 0;
+let galleryAutoSlide;
+let isGalleryDragging = false;
+let galleryStartPos = 0;
+let galleryCurrentTranslate = 0;
+let galleryPrevTranslate = 0;
+let galleryAnimationID = null;
+
+// Initialize Gallery Carousel
+function initGalleryCarousel() {
+    if (!galleryCarousel) return;
+    
+    showGallerySlide(currentGallerySlide);
+    
+    // Start auto slide for gallery
+    startGalleryAutoSlide();
+    
+    // Setup event listeners
+    setupGalleryEventListeners();
+    
+    // Prevent context menu on drag
+    galleryCarousel.oncontextmenu = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    };
+}
+
+// Start auto slide
+function startGalleryAutoSlide() {
+    clearInterval(galleryAutoSlide);
+    galleryAutoSlide = setInterval(nextGallerySlide, 6000); // 6 seconds interval
+}
+
+// Show specific gallery slide
+function showGallerySlide(index) {
+    // Ensure index is within bounds
+    if (index < 0) index = gallerySlides.length - 1;
+    if (index >= gallerySlides.length) index = 0;
+    
+    // Update current slide
+    currentGallerySlide = index;
+    
+    // Update carousel position with animation
+    galleryCarousel.style.transition = 'transform 0.5s ease';
+    galleryCarousel.style.transform = `translateX(-${currentGallerySlide * 100}%)`;
+    
+    // Update active classes
+    gallerySlides.forEach(slide => slide.classList.remove('active'));
+    galleryDots.forEach(dot => dot.classList.remove('active'));
+    
+    if (gallerySlides[currentGallerySlide]) {
+        gallerySlides[currentGallerySlide].classList.add('active');
+    }
+    if (galleryDots[currentGallerySlide]) {
+        galleryDots[currentGallerySlide].classList.add('active');
+    }
+}
+
+// Next gallery slide
+function nextGallerySlide() {
+    showGallerySlide(currentGallerySlide + 1);
+}
+
+// Previous gallery slide
+function prevGallerySlide() {
+    showGallerySlide(currentGallerySlide - 1);
+}
+
+// Setup event listeners
+function setupGalleryEventListeners() {
+    // Mouse events
+    galleryCarousel.addEventListener('mousedown', galleryDragStart);
+    galleryCarousel.addEventListener('mouseup', galleryDragEnd);
+    galleryCarousel.addEventListener('mouseleave', galleryDragEnd);
+    galleryCarousel.addEventListener('mousemove', galleryDrag);
+    
+    // Touch events
+    galleryCarousel.addEventListener('touchstart', galleryDragStart, { passive: true });
+    galleryCarousel.addEventListener('touchend', galleryDragEnd);
+    galleryCarousel.addEventListener('touchmove', galleryDrag, { passive: true });
+    
+    // Button events
+    if (galleryPrevBtn) {
+        galleryPrevBtn.addEventListener('click', () => {
+            clearInterval(galleryAutoSlide);
+            prevGallerySlide();
+            startGalleryAutoSlide();
+        });
+    }
+    
+    if (galleryNextBtn) {
+        galleryNextBtn.addEventListener('click', () => {
+            clearInterval(galleryAutoSlide);
+            nextGallerySlide();
+            startGalleryAutoSlide();
+        });
+    }
+    
+    // Dot events
+    if (galleryDots.length > 0) {
+        galleryDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(galleryAutoSlide);
+                showGallerySlide(index);
+                startGalleryAutoSlide();
+            });
+        });
+    }
+    
+    // Pause auto slide on hover
+    const galleryContainer = document.querySelector('.gallery-carousel-container');
+    if (galleryContainer) {
+        galleryContainer.addEventListener('mouseenter', () => {
+            clearInterval(galleryAutoSlide);
+        });
+
+        galleryContainer.addEventListener('mouseleave', () => {
+            startGalleryAutoSlide();
+        });
+        
+        // Untuk touch devices
+        galleryContainer.addEventListener('touchstart', () => {
+            clearInterval(galleryAutoSlide);
+        }, { passive: true });
+        
+        galleryContainer.addEventListener('touchend', () => {
+            startGalleryAutoSlide();
+        }, { passive: true });
+    }
+}
+
+// Drag functions
+function galleryDragStart(e) {
+    // Pause auto slide
+    clearInterval(galleryAutoSlide);
+    
+    // Set dragging state
+    isGalleryDragging = true;
+    galleryCarousel.classList.add('grabbing');
+    
+    // Get initial position
+    if (e.type === 'touchstart') {
+        galleryStartPos = e.touches[0].clientX;
+    } else {
+        galleryStartPos = e.clientX;
+        e.preventDefault();
+    }
+    
+    // Get current translate
+    const currentTransform = window.getComputedStyle(galleryCarousel).getPropertyValue('transform');
+    if (currentTransform !== 'none') {
+        const matrix = new DOMMatrix(currentTransform);
+        galleryCurrentTranslate = matrix.m41;
+    } else {
+        galleryCurrentTranslate = 0;
+    }
+    
+    galleryPrevTranslate = galleryCurrentTranslate;
+    
+    // Cancel any ongoing animation
+    if (galleryAnimationID) {
+        cancelAnimationFrame(galleryAnimationID);
+    }
+}
+
+function galleryDrag(e) {
+    if (!isGalleryDragging) return;
+    
+    // Get current position
+    let currentPosition;
+    if (e.type === 'touchmove') {
+        currentPosition = e.touches[0].clientX;
+    } else {
+        currentPosition = e.clientX;
+    }
+    
+    // Calculate drag distance
+    const draggedDistance = currentPosition - galleryStartPos;
+    galleryCurrentTranslate = galleryPrevTranslate + draggedDistance;
+    
+    // Apply transform WITHOUT transition for smooth dragging
+    galleryCarousel.style.transition = 'none';
+    galleryAnimationID = requestAnimationFrame(() => {
+        galleryCarousel.style.transform = `translateX(${galleryCurrentTranslate}px)`;
+    });
+}
+
+function galleryDragEnd() {
+    if (!isGalleryDragging) return;
+    
+    // Reset dragging state
+    isGalleryDragging = false;
+    galleryCarousel.classList.remove('grabbing');
+    
+    // Calculate how far we dragged (in percentage of slide width)
+    const slideWidth = galleryCarousel.offsetWidth;
+    const draggedDistance = galleryCurrentTranslate - galleryPrevTranslate;
+    const threshold = slideWidth * 0.1; // 10% threshold
+    
+    // Determine if we should change slide
+    let newSlide = currentGallerySlide;
+    
+    if (Math.abs(draggedDistance) > threshold) {
+        if (draggedDistance > 0) {
+            // Dragged right - go to previous slide
+            newSlide = currentGallerySlide - 1;
+        } else {
+            // Dragged left - go to next slide
+            newSlide = currentGallerySlide + 1;
+        }
+    }
+    
+    // Show the new slide
+    showGallerySlide(newSlide);
+    
+    // Restart auto slide
+    startGalleryAutoSlide();
+}
+
+// Initialize on DOM ready
+document.addEventListener('DOMContentLoaded', initGalleryCarousel);
+
+// Re-initialize on window resize (untuk responsive)
+window.addEventListener('resize', () => {
+    // Reset position on resize
+    galleryCarousel.style.transition = 'none';
+    galleryCarousel.style.transform = `translateX(-${currentGallerySlide * 100}%)`;
+    
+    // Force reflow
+    galleryCarousel.offsetHeight;
+    
+    // Re-enable transition
+    galleryCarousel.style.transition = 'transform 0.5s ease';
+});
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize promo slider
+    if (typeof initSlider === 'function') {
+        initSlider();
+    }
+    
+    // Initialize gallery carousel
+    if (typeof initGalleryCarousel === 'function') {
+        initGalleryCarousel();
+    }
+    
+    // Initialize other functions
+    if (typeof checkScroll === 'function') {
+        checkScroll();
+    }
+    
+    if (typeof initSEO === 'function') {
+        initSEO();
+    }
+    
+    // Force check for animations
+    setTimeout(checkScroll, 500);
+});
+
+// Fallback: jika ada masalah dengan event listener
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGalleryCarousel);
+} else {
+    setTimeout(initGalleryCarousel, 100);
+}
+
+// ========== GALLERY CAROUSEL SIMPLE & WORKING ==========
+document.addEventListener('DOMContentLoaded', function() {
+    initGalleryCarousel();
+});
+
+function initGalleryCarousel() {
+    const galleryCarousel = document.querySelector('.gallery-carousel');
+    const gallerySlides = document.querySelectorAll('.gallery-slide');
+    const galleryDots = document.querySelectorAll('.gallery-dot');
+    const galleryPrevBtn = document.querySelector('.gallery-controls .prev');
+    const galleryNextBtn = document.querySelector('.gallery-controls .next');
+    
+    if (!galleryCarousel || gallerySlides.length === 0) {
+        console.error('Gallery carousel elements not found');
+        return;
+    }
+    
+    console.log(`Gallery: Found ${gallerySlides.length} slides`);
+    
+    let currentSlide = 0;
+    let autoSlideInterval;
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    
+    // Initialize carousel
+    function init() {
+        updateCarousel();
+        startAutoSlide();
+        setupEventListeners();
+        console.log('Gallery carousel initialized');
+    }
+    
+    // Update carousel position
+    function updateCarousel() {
+        // Pastikan currentSlide valid
+        if (currentSlide < 0) currentSlide = gallerySlides.length - 1;
+        if (currentSlide >= gallerySlides.length) currentSlide = 0;
+        
+        // Update transform
+        galleryCarousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+        
+        // Update active classes
+        gallerySlides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === currentSlide);
+        });
+        
+        galleryDots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+        
+        console.log(`Gallery: Showing slide ${currentSlide + 1}`);
+    }
+    
+    // Go to next slide
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % gallerySlides.length;
+        updateCarousel();
+    }
+    
+    // Go to previous slide
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + gallerySlides.length) % gallerySlides.length;
+        updateCarousel();
+    }
+    
+    // Go to specific slide
+    function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+    }
+    
+    // Start auto sliding
+    function startAutoSlide() {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(nextSlide, 6000);
+    }
+    
+    // Stop auto sliding
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
+    
+    // Setup event listeners
+    function setupEventListeners() {
+        // Button events
+        if (galleryPrevBtn) {
+            galleryPrevBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                stopAutoSlide();
+                prevSlide();
+                startAutoSlide();
+            });
+        }
+        
+        if (galleryNextBtn) {
+            galleryNextBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                stopAutoSlide();
+                nextSlide();
+                startAutoSlide();
+            });
+        }
+        
+        // Dot events
+        galleryDots.forEach((dot, index) => {
+            dot.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                stopAutoSlide();
+                goToSlide(index);
+                startAutoSlide();
+            });
+        });
+        
+        // Mouse events for dragging
+        galleryCarousel.addEventListener('mousedown', dragStart);
+        galleryCarousel.addEventListener('mousemove', drag);
+        galleryCarousel.addEventListener('mouseup', dragEnd);
+        galleryCarousel.addEventListener('mouseleave', dragEnd);
+        
+        // Touch events for mobile
+        galleryCarousel.addEventListener('touchstart', dragStart, { passive: true });
+        galleryCarousel.addEventListener('touchmove', drag, { passive: true });
+        galleryCarousel.addEventListener('touchend', dragEnd);
+        
+        // Pause on hover
+        const container = galleryCarousel.closest('.gallery-carousel-container');
+        if (container) {
+            container.addEventListener('mouseenter', stopAutoSlide);
+            container.addEventListener('mouseleave', startAutoSlide);
+            container.addEventListener('touchstart', stopAutoSlide, { passive: true });
+        }
+    }
+    
+    // Drag functions
+    function dragStart(e) {
+        stopAutoSlide();
+        isDragging = true;
+        galleryCarousel.classList.add('grabbing');
+        
+        if (e.type === 'touchstart') {
+            startX = e.touches[0].clientX;
+        } else {
+            startX = e.clientX;
+            e.preventDefault();
+        }
+        
+        // Get current transform
+        const transform = window.getComputedStyle(galleryCarousel).transform;
+        if (transform !== 'none') {
+            const matrix = new DOMMatrix(transform);
+            currentTranslate = matrix.m41;
+        } else {
+            currentTranslate = 0;
+        }
+        prevTranslate = currentTranslate;
+        
+        galleryCarousel.style.transition = 'none';
+    }
+    
+    function drag(e) {
+        if (!isDragging) return;
+        
+        let currentX;
+        if (e.type === 'touchmove') {
+            currentX = e.touches[0].clientX;
+        } else {
+            currentX = e.clientX;
+        }
+        
+        const dragDistance = currentX - startX;
+        currentTranslate = prevTranslate + dragDistance;
+        
+        galleryCarousel.style.transform = `translateX(${currentTranslate}px)`;
+    }
+    
+    function dragEnd() {
+        if (!isDragging) return;
+        
+        isDragging = false;
+        galleryCarousel.classList.remove('grabbing');
+        galleryCarousel.style.transition = 'transform 0.5s ease';
+        
+        const slideWidth = galleryCarousel.offsetWidth;
+        const draggedDistance = currentTranslate - prevTranslate;
+        
+        // Jika drag cukup jauh, ganti slide
+        if (Math.abs(draggedDistance) > slideWidth * 0.2) {
+            if (draggedDistance > 0) {
+                prevSlide(); // drag ke kanan
+            } else {
+                nextSlide(); // drag ke kiri
+            }
+        } else {
+            // Kembali ke slide saat ini
+            updateCarousel();
+        }
+        
+        startAutoSlide();
+    }
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        galleryCarousel.style.transition = 'none';
+        updateCarousel();
+        
+        // Restore transition
+        setTimeout(() => {
+            galleryCarousel.style.transition = 'transform 0.5s ease';
+        }, 100);
+    });
+    
+    // Initialize
+    init();
+}
+
+// ========== PROFILE PHOTO DROPDOWN ==========
+const profilePhoto = document.getElementById('profile-photo');
+const profileDropdown = document.getElementById('profile-dropdown');
+let dropdownTimeout;
+
+// Create overlay for closing dropdown
+const dropdownOverlay = document.createElement('div');
+dropdownOverlay.className = 'profile-dropdown-overlay';
+document.body.appendChild(dropdownOverlay);
+
+// Toggle dropdown when profile photo is clicked
+profilePhoto.addEventListener('click', function(e) {
+    e.stopPropagation();
+    profileDropdown.classList.toggle('active');
+    dropdownOverlay.classList.toggle('active');
+    
+    // Clear any existing timeout
+    clearTimeout(dropdownTimeout);
+});
+
+// Close dropdown when clicking outside
+dropdownOverlay.addEventListener('click', function() {
+    closeProfileDropdown();
+});
+
+document.addEventListener('click', function(e) {
+    if (!profilePhoto.contains(e.target) && !profileDropdown.contains(e.target)) {
+        closeProfileDropdown();
+    }
+});
+
+// Close dropdown function
+function closeProfileDropdown() {
+    profileDropdown.classList.remove('active');
+    dropdownOverlay.classList.remove('active');
+}
+
+// Close dropdown when pressing ESC key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeProfileDropdown();
+    }
+});
+
+// Close dropdown on mobile when menu is toggled
+menuToggle.addEventListener('click', function() {
+    if (window.innerWidth <= 768) {
+        closeProfileDropdown();
+    }
+});
+
+// Close dropdown when clicking on nav links (mobile)
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+            closeProfileDropdown();
+        }
+    });
+});
+
+// Add hover effects for desktop
+if (window.innerWidth > 768) {
+    profilePhoto.addEventListener('mouseenter', function() {
+        clearTimeout(dropdownTimeout);
+        profileDropdown.classList.add('active');
+        dropdownOverlay.classList.add('active');
+    });
+    
+    profilePhoto.addEventListener('mouseleave', function() {
+        dropdownTimeout = setTimeout(() => {
+            if (!profileDropdown.matches(':hover')) {
+                closeProfileDropdown();
+            }
+        }, 300);
+    });
+    
+    profileDropdown.addEventListener('mouseenter', function() {
+        clearTimeout(dropdownTimeout);
+    });
+    
+    profileDropdown.addEventListener('mouseleave', function() {
+        dropdownTimeout = setTimeout(() => {
+            closeProfileDropdown();
+        }, 300);
+    });
+}
+
+// Update profile photo based on screen size
+function updateProfilePhoto() {
+    const profileImg = document.getElementById('profile-img');
+    
+    // You can change the image source based on screen size if needed
+    if (window.innerWidth <= 480) {
+        // Use smaller image for mobile if available
+        // profileImg.src = 'profile-logo-small.jpg';
+    } else {
+        // Use regular image for desktop
+        // profileImg.src = 'profile-logo.jpg';
+    }
+}
+
+// Call on resize
+window.addEventListener('resize', updateProfilePhoto);
+
+// Initialize
+updateProfilePhoto();
