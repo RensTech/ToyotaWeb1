@@ -1,9 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /cgi-bin/
-Disallow: /wp-admin/
-Disallow: /wp-includes/
-Disallow: /search/
 
 Sitemap: https://adlan-toyota-jakarta-selatan.my.id/sitemap.xml
